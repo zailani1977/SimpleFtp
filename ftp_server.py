@@ -1,3 +1,36 @@
+"""
+Simple FTP Server using pyftpdlib.
+
+This script implements a basic FTP server that allows anonymous read-only access
+to the current directory or a specified directory. It is intended for testing
+and simple file sharing purposes.
+
+Dependencies:
+    pip install pyftpdlib
+
+Usage:
+    python3 ftp_server.py [options]
+
+Options:
+    -h, --help   Show this help message and exit
+    --port PORT  Port to listen on (default: 2121)
+    --dir DIR    Directory to serve (default: current directory)
+
+Examples:
+    # Start server on default port 2121 serving current directory
+    python3 ftp_server.py
+
+    # Start server on port 8021 serving /tmp
+    python3 ftp_server.py --port 8021 --dir /tmp
+
+Connecting:
+    # Connect using command line ftp client
+    ftp localhost 2121
+
+    # Connect using curl
+    curl ftp://localhost:2121/filename.txt
+"""
+
 import os
 import sys
 import argparse
@@ -45,6 +78,7 @@ def main():
 
     print(f"Starting FTP server on {address[0]}:{address[1]}")
     print(f"Serving directory: {args.dir}")
+    print(f"To connect, use: ftp localhost {args.port}")
 
     # start ftp server
     server.serve_forever()
