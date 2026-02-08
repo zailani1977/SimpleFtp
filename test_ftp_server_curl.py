@@ -1,3 +1,19 @@
+"""
+Test script for FTP Server using curl.
+
+This script automates the testing of `ftp_server.py`. It starts the FTP server
+as a subprocess, creates a temporary test file, and uses `curl` to fetch the file
+from the server. It then verifies that the fetched content matches the original
+content.
+
+Dependencies:
+    curl (command line tool)
+    ftp_server.py (in the same directory)
+
+Usage:
+    python3 test_ftp_server_curl.py
+"""
+
 import subprocess
 import time
 import os
