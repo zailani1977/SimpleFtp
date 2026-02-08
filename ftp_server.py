@@ -81,7 +81,11 @@ def main():
     print(f"To connect, use: ftp localhost {args.port}")
 
     # start ftp server
-    server.serve_forever()
+    try:
+        server.serve_forever(handle_exit=False)
+    except KeyboardInterrupt:
+        print("\nStopping FTP server...")
+        server.close_all()
 
 if __name__ == '__main__':
     main()
