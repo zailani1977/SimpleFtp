@@ -1,7 +1,7 @@
 """
 Simple FTP Server using pyftpdlib.
 
-This script implements a basic FTP server that allows anonymous read-only access
+This script implements a basic FTP server that allows anonymous read/write access
 to the current directory or a specified directory. It is intended for testing
 and simple file sharing purposes.
 
@@ -54,12 +54,13 @@ def main():
     authorizer = DummyAuthorizer()
 
     # Only adding anonymous user as requested for a simple implementation
-    # allowing read-only access to current directory
+    # allowing read/write access to current directory
     # The permissions are:
     # e - change directory (CWD, CDUP)
     # l - list files (LIST, NLST, STAT, MLSD, MLST, SIZE)
     # r - retrieve file from the server (RETR)
-    authorizer.add_anonymous(args.dir, perm='elr')
+    # w - store a file to the server (STOR, STOU)
+    authorizer.add_anonymous(args.dir, perm='elrw')
 
     # Instantiate FTP handler class
     handler = FTPHandler
